@@ -64,13 +64,13 @@ class _ChooseNewsPageState extends State<ChooseNewsPage> {
 
 Container newsSection({IconData icon, String text, context, typeContent}) {
   return Container(
-    child: CircleAvatar(
-      backgroundColor: Colors.blueGrey[700],
-      child: GestureDetector(
-        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+    child: GestureDetector(
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => NewsPage(
                   typeContent: typeContent,
                 ))),
+          child: CircleAvatar(
+        backgroundColor: Colors.blueGrey[700],
         child: Center(
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
