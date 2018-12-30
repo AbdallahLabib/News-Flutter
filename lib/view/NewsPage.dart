@@ -1,12 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/controller/getNews.dart';
 import 'package:news_app/model/NewsResult.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 class NewsPage extends StatefulWidget {
   final String typeContent;
 
-  NewsPage({this.typeContent = "techology"}) :assert(typeContent != null);
+  NewsPage({this.typeContent = "technology"}) :assert(typeContent != null);
 
   @override
   _NewsPageState createState() => _NewsPageState();
@@ -44,7 +43,7 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
-          title: Text("News Of " + widget.typeContent.toUpperCase()),
+          title: Text("News Of " + widget.typeContent),
           centerTitle: true,
         ),
         body: SafeArea(

@@ -15,9 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(builder: (BuildContext context) => ChooseNewsPage()));
   }
 
-  //----------- Make timer to waite 6 second after moving to next page -----------//
+  //----------- Make timer to wait 4 second after moving to next page -----------//
   void startTimer() {
-    Duration timerSecond = Duration(seconds: 6);
+    Duration timerSecond = Duration(seconds: 4);
     Timer(timerSecond, _goToNextPage);
   }
 
