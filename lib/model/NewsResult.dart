@@ -125,17 +125,17 @@ class Articles {
 }
 
 class Source {
-  Null _id;
+  String _id;
   String _name;
 
-  Source({Null id, String name}) {
+  Source({String id, String name}) {
     this._id = id;
     this._name = name;
   }
 
-  Null get id => _id;
+  String get id => _id;
 
-  set id(Null id) => _id = id;
+  set id(String id) => _id = id;
 
   String get name => _name;
 
