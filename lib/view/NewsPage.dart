@@ -56,8 +56,8 @@ class _NewsPageState extends State<NewsPage> {
                       itemCount: newsResult.articles.length,
                       itemBuilder: (BuildContext context, int position) {
                         return CardViewNews(
-                          title: newsResult.articles[position].title,
-                          image: newsResult.articles[position].urlToImage,
+                          title: newsResult.articles[position].title == null ? '' : newsResult.articles[position].title,
+                          image: newsResult.articles[position].urlToImage== null ? '' : newsResult.articles[position].urlToImage,
                         );
                       });
                 }
