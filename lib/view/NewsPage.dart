@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/controller/getNews.dart';
 import 'package:news_app/model/NewsResult.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 class NewsPage extends StatefulWidget {
   final String typeContent;
 
@@ -58,6 +59,7 @@ class _NewsPageState extends State<NewsPage> {
                         return CardViewNews(
                           title: newsResult.articles[position].title == null ? '' : newsResult.articles[position].title,
                           image: newsResult.articles[position].urlToImage== null ? '' : newsResult.articles[position].urlToImage,
+                          url: newsResult.articles[position].url == null ? 'www.google.com' : newsResult.articles[position].url,
                         );
                       });
                 }
@@ -70,8 +72,8 @@ class _NewsPageState extends State<NewsPage> {
 class CardViewNews extends StatefulWidget {
   final String image;
   final String title;
-
-  const CardViewNews({Key key, this.image, this.title}) : super(key: key);
+  final String url;
+  const CardViewNews({Key key, this.image, this.title,this.url}) : super(key: key);
 
   @override
   _CardViewNewsState createState() => _CardViewNewsState();
@@ -80,39 +82,46 @@ class CardViewNews extends StatefulWidget {
 class _CardViewNewsState extends State<CardViewNews> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        height: 180,
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
-        child: Card(
-          margin: EdgeInsets.all(10),
-          elevation: 4,
-          child: SafeArea(
-              child: Row(
-                textDirection: TextDirection.rtl,
-                children: <Widget>[
-                  Container(
-                      height: 180,
-                      width: 140,
-                      child: Image.network(
-                        widget.image,
-                        fit: BoxFit.fill,
-                      )),
-                  Expanded(
-                      child: Align(
-                          alignment: Alignment.topRight,
-                          child: Padding(
-                              padding: EdgeInsets.all(5), child: AutoSizeText(
-                            widget.title,
-                            textDirection: TextDirection.rtl,
-                            presetFontSizes: [40.0, 20.0, 16.0],
-                            maxLines: 2,
-                          )))),
-                ],
-              )),
+    return InkWell(
+      onTap: ()=>launch(widget.url,
+      forceWebView: true,
+      forceSafariVC: true,
+      enableJavaScript: true,
+      ),
+          child: Material(
+        child: Container(
+          height: 180,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
+          child: Card(
+            margin: EdgeInsets.all(10),
+            elevation: 4,
+            child: SafeArea(
+                child: Row(
+                  textDirection: TextDirection.rtl,
+                  children: <Widget>[
+                    Container(
+                        height: 180,
+                        width: 140,
+                        child: Image.network(
+                          widget.image,
+                          fit: BoxFit.fill,
+                        )),
+                    Expanded(
+                        child: Align(
+                            alignment: Alignment.topRight,
+                            child: Padding(
+                                padding: EdgeInsets.all(5), child: AutoSizeText(
+                              widget.title,
+                              textDirection: TextDirection.rtl,
+                              presetFontSizes: [40.0, 20.0, 16.0],
+                              maxLines: 2,
+                            )))),
+                  ],
+                )),
+          ),
         ),
       ),
     );
