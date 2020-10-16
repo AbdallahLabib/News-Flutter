@@ -16,28 +16,8 @@ class _NewsPageState extends State<NewsPage> {
   GetNews _getNews = GetNews();
 
   //----------- Choose Content of news and return data  -----------//
-  _switchType() {
-    switch (widget.typeContent) {
-      case 'business':
-        return _getNews.getBusinessNews();
-        break;
-      case 'entertainment':
-        return _getNews.getEntertainmentNews();
-        break;
-      case 'health':
-        return _getNews.getHealthNews();
-        break;
-      case 'science':
-        return _getNews.getScienceNews();
-        break;
-      case 'sports':
-        return _getNews.getSportsNews();
-        break;
-      case 'technology':
-        return _getNews.getTechnologyNews();
-        break;
-    }
-    return null;
+  _fetchNews() {
+   return _getNews.getNewsByType(widget.typeContent);
   }
 
   @override
@@ -49,7 +29,7 @@ class _NewsPageState extends State<NewsPage> {
         ),
         body: SafeArea(
           child: FutureBuilder(
-              future: _switchType(),
+              future: _fetchNews(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   NewsResult newsResult = snapshot.data;
@@ -58,7 +38,7 @@ class _NewsPageState extends State<NewsPage> {
                       itemBuilder: (BuildContext context, int position) {
                         return CardViewNews(
                           title: newsResult.articles[position].title == null ? '' : newsResult.articles[position].title,
-                          image: newsResult.articles[position].urlToImage== null ? '' : newsResult.articles[position].urlToImage,
+                          image: newsResult.articles[position].urlToImage== null ? 'https://safetyaustraliagroup.com.au/wp-content/uploads/2019/05/image-not-found.png' : newsResult.articles[position].urlToImage,
                           url: newsResult.articles[position].url == null ? 'www.google.com' : newsResult.articles[position].url,
                         );
                       });
@@ -97,18 +77,20 @@ class _CardViewNewsState extends State<CardViewNews> {
               .width,
           child: Card(
             margin: EdgeInsets.all(10),
-            elevation: 4,
+            elevation: 5,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: SafeArea(
                 child: Row(
                   textDirection: TextDirection.rtl,
                   children: <Widget>[
                     Container(
                         height: 180,
-                        width: 140,
-                        child: Image.network(
-                          widget.image,
-                          fit: BoxFit.fill,
-                        )),
+                        width: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(15),bottomRight: Radius.circular(15)),
+                          image: DecorationImage(image: NetworkImage(widget.image,),fit: BoxFit.fill)
+                        ),
+                       ),
                     Expanded(
                         child: Align(
                             alignment: Alignment.topRight,
