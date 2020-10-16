@@ -5,7 +5,7 @@ A Flutter News Application to fetch all Egypt News resources and Show it
 
 ### Screenshots
 
-![makephotogallery.net_1580238239.jpg](images/image.png)
+![makephotogallery.net_1580238239.jpg](images/ImageReadme.png)
 
 ### Dependencies
 
